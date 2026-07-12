@@ -2,10 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
-router.get("/message", (req, res) => {
-    res.json({
-        message: "Hello Tony starts learning React and Node.js with Mayank Mishra!"
-    });
-});
+const { getMessage } = require("../controllers/messageController");
+
+router.get("/message", getMessage);
 
 module.exports = router;
