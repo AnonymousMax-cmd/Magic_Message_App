@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get("/message", (req, res) => {
     res.json({
-        message: "Welcome to the Magic Message App!"
+        message: "Hello Tony starts learning React and Node.js with Mayank Mishra!"
     });
 });
 
