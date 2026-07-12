@@ -1,17 +1,10 @@
-magic-message-app
-│
-├── backend
-├── frontend
-├── docker-compose.yml
-│
-└── .github
-    └── workflows
-        └── ci.ymlname: Magic Message CI
+name: Magic Message CI
 
 on:
   push:
     branches:
       - dev
+      - feature/docker-setup
 
   pull_request:
     branches:
@@ -19,37 +12,36 @@ on:
 
 
 jobs:
-
   build-test:
 
     runs-on: ubuntu-latest
 
     steps:
 
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
 
-    - name: Install Frontend Dependencies
-      working-directory: frontend
-      run: npm install
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: npm install
 
 
-    - name: Build React Application
-      working-directory: frontend
-      run: npm run build
+      - name: Build React Application
+        working-directory: ./frontend
+        run: npm run build
 
 
-    - name: Install Backend Dependencies
-      working-directory: backend
-      run: npm install
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: npm install
 
 
-    - name: Docker Build
-      run: docker compose build
+      - name: Docker Build
+        run: docker compose build
