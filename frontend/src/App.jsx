@@ -1,42 +1,43 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
+
   const [keyword, setKeyword] = useState("");
   const [message, setMessage] = useState("");
 
-  const checkKeyword = () => {
-    if (keyword.toLowerCase() === "docker") {
-      setMessage("🐳 Docker is Awesome!");
-    } else if (keyword.toLowerCase() === "azure") {
-      setMessage("☁️ Welcome Azure Engineer!");
-    } else if (keyword.toLowerCase() === "github") {
-      setMessage("🚀 GitHub Actions is Working!");
-} else if (keyword.toLowerCase() === "jyoti") {
-      setMessage("ab to ghar ja rhi ho ap!");
+  const getMessage = async () => {
 
-    } else {
-      setMessage("❌ Invalid Keyword");
-    }
+const response = await fetch(
+  `/api/message?keyword=${keyword}`
+);
+
+    const data = await response.json();
+
+    setMessage(data.message);
+
   };
 
   return (
-    <div>
-      <h1>Magic Message</h1>
+    <div className="container">
+
+      <h1>Magic Message App</h1>
 
       <input
         type="text"
-        placeholder="Enter a keyword"
+        placeholder="Enter keyword"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
       />
 
       <br /><br />
 
-      <button onClick={checkKeyword}>
+      <button onClick={getMessage}>
         Submit
       </button>
 
       <h2>{message}</h2>
+
     </div>
   );
 }
