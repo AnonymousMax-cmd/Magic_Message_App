@@ -1,42 +1,37 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [keyword, setKeyword] = useState("");
   const [message, setMessage] = useState("");
 
   const checkKeyword = () => {
-    if (keyword.toLowerCase() === "docker") {
-      setMessage("🐳 Docker is Awesome!");
-    } else if (keyword.toLowerCase() === "azure") {
-      setMessage("☁️ Welcome Azure Engineer!");
-    } else if (keyword.toLowerCase() === "github") {
-      setMessage("🚀 GitHub Actions is Working!");
-} else if (keyword.toLowerCase() === "jyoti") {
-      setMessage("ab to ghar ja rhi ho ap!");
+    const value = keyword.toLowerCase();
 
-    } else {
+    if (value === "docker")
+      setMessage("🐳 Docker is Awesome!");
+    else if (value === "azure")
+      setMessage("☁️ Welcome Azure Engineer!");
+    else if (value === "github")
+      setMessage("🚀 GitHub Actions Rocks!");
+    else
       setMessage("❌ Invalid Keyword");
-    }
   };
 
   return (
-    <div>
-      <h1>Magic Message</h1>
+    <div className="container">
+      <h1>DevOps Magic Message</h1>
 
       <input
         type="text"
-        placeholder="Enter a keyword"
+        placeholder="Enter Keyword"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
       />
 
-      <br /><br />
+      <button onClick={checkKeyword}>Submit</button>
 
-      <button onClick={checkKeyword}>
-        Submit
-      </button>
-
-      <h2>{message}</h2>
+      <div className="message">{message}</div>
     </div>
   );
 }
